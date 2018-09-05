@@ -1,0 +1,50 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-4">
+      <h1>Employee's Profile</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img-top img-thumbnail" src="http://shopforclipart.com/images/selfish-people-cliparts/27.jpg" alt="">
+        <div class="card-body">
+          <div>
+              <strong>ENumber:</strong>
+              <p>
+                <span class="badge badge-dark">{{ employeeResult?.employee?.eNumber }}</span>
+              </p>
+          </div>
+          <div>
+            <strong>Full name:</strong>
+            <p>{{ employeeResult?.employee?.title }} {{ employeeResult?.employee?.firstName }} {{ employeeResult?.employee?.lastName }}</p>
+          </div>
+          <div>
+              <strong>Role:</strong>
+              <p>{{ employeeResult?.employee?.role }}</p>
+          </div>
+          <div>
+              <strong>Email:</strong>
+              <p>{{ employeeResult?.employee?.email }}</p>
+          </div>
+          <div>
+              <strong>Date of birth:</strong>
+              <p>{{ employeeResult?.employee?.dateOfBirth | date }}</p>
+          </div>
+          <div>
+              <strong>Gender:</strong>
+              <p>{{ gender }}</p>
+          </div>
+          <div *ngIf="employeeResult?.employee?.department != null">
+            <strong>Department:</strong>
+            <p>
+              <span class="badge badge-info">
+                {{ employeeResult?.employee?.department?.name }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div>
+  <select [(ngModel)]="selectedDepartmentId" (change)="selectDepartment()">
+    <option *ngFor="let department of departments"
+            [value]="department?.id"
+            [selected]="department?.id == selectedDepartmentId">
+            {{ department?.name }}
+    </option>
+  </select>
+</div>

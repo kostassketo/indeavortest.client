@@ -1,0 +1,9 @@
+<div class="container mt-5">
+  <div class="row">
+    <div *ngFor="let employee of employeesResult?.employees" class="col-lg-2 col-md-3 col-sm-6">
+     <indeavor-employee-item
+        [employee]="employee"
+        (employeeDeleted)="onEmployeeDeletion(employee?.id)"></indeavor-employee-item>
+    </div>
+  </div>
+</div>

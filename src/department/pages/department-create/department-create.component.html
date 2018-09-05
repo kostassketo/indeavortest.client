@@ -1,0 +1,50 @@
+<div class="container mt-8">
+    <div class="row">
+      <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <form [formGroup]="createDepartmentForm" (ngSubmit)="createEmployee()">
+                <h3>Create new Department</h3>
+                <div class="form-group">
+                  <input type="text"
+                        [ngClass]="{ 'is-invalid': createDepartmentForm.get('name').errors &&
+                                                   createDepartmentForm.get('name').touched }"
+                        formControlName="name"
+                        class="form-control"
+                        placeholder="Name">
+                  <div class="invalid-feedback"
+                       *ngIf="createDepartmentForm.get('name').hasError('required') &&
+                              createDepartmentForm.get('name').touched">
+                    Please enter a name.
+                  </div>
+                  <div class="invalid-feedback"
+                       *ngIf="createDepartmentForm.get('name').hasError('maxlength') &&
+                              createDepartmentForm.get('name').touched">
+                    Name cannot exceed 50 characters.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="text" formControlName="code"
+                          [ngClass]="{ 'is-invalid': createDepartmentForm.get('code').errors &&
+                                                     createDepartmentForm.get('code').touched }"
+                          class="form-control" placeholder="Code">
+                  <div class="invalid-feedback"
+                       *ngIf="createDepartmentForm.get('code').hasError('required') &&
+                              createDepartmentForm.get('code').touched">
+                    Please enter code.
+                  </div>
+                  <div class="invalid-feedback"
+                       *ngIf="createDepartmentForm.get('code').hasError('maxlength') &&
+                              createDepartmentForm.get('code').touched">
+                    Code name cannot exceed 100 characters.
+                  </div>
+                </div>
+                <div class="form-group text-center">
+                    <button class="btn btn-success btn-block" type="submit">Create</button>
+                  </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

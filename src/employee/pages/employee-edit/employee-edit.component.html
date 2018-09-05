@@ -1,0 +1,199 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-4">
+      <h1>Employee's Profile</h1>
+    </div>
+    <div class="col-sm-6">
+      <div *ngIf="editEmployeeForm.dirty" class="alert alert-info">
+        <strong>Information:</strong> You have made changes. Make sure to save them before you leave the page!
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img-top img-thumbnail" src="http://shopforclipart.com/images/selfish-people-cliparts/27.jpg" alt="">
+        <div class="card-body">
+          <div>
+            <strong>ENumber:</strong>
+            <p>
+              <span class="badge badge-dark">{{ employeeResult?.employee?.eNumber }}</span>
+            </p>
+          </div>
+          <div>
+            <strong>Full name:</strong>
+            <p>{{ employeeResult?.employee?.title }} {{ employeeResult?.employee?.firstName }} {{ employeeResult?.employee?.lastName }}</p>
+          </div>
+          <div>
+              <strong>Role:</strong>
+              <p>{{ employeeResult?.employee?.role }}</p>
+          </div>
+          <div>
+              <strong>Email:</strong>
+              <p>{{ employeeResult?.employee?.email }}</p>
+          </div>
+          <div>
+              <strong>Date of birth:</strong>
+              <p>{{ employeeResult?.employee?.dateOfBirth | date }}</p>
+          </div>
+          <div>
+              <strong>Gender:</strong>
+              <p>{{ gender }}</p>
+          </div>
+          <div *ngIf="employeeResult?.employee?.departmentId > 0">
+            <strong>Department:</strong>
+            <p>
+              <span class="badge badge-info">
+                {{ departmentResult?.department?.name }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button [disabled]="!editEmployeeForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
+      </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="editEmployeeForm" id="editForm" (ngSubmit)="updateEmployee()">
+              <h3>Edit Employee</h3>
+              <div class="form-group">
+                <input type="text"
+                      [ngClass]="{ 'is-invalid': editEmployeeForm.get('title').errors &&
+                                                  editEmployeeForm.get('title').touched }"
+                      formControlName="title"
+                      class="form-control"
+                      placeholder="Title">
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('title').hasError('required') &&
+                            editEmployeeForm.get('title').touched">
+                  Please enter a title.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('title').hasError('maxlength') &&
+                            editEmployeeForm.get('title').touched">
+                  Title cannot exceed 10 characters.
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="firstName"
+                        [ngClass]="{ 'is-invalid': editEmployeeForm.get('firstName').errors &&
+                                                    editEmployeeForm.get('firstName').touched }"
+                        class="form-control" placeholder="First Name">
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('firstName').hasError('required') &&
+                            editEmployeeForm.get('firstName').touched">
+                  Please enter first name.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('firstName').hasError('maxlength') &&
+                            editEmployeeForm.get('firstName').touched">
+                  First name cannot exceed 30 characters.
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="lastName"
+                        [ngClass]="{ 'is-invalid': editEmployeeForm.get('lastName').errors &&
+                                                    editEmployeeForm.get('lastName').touched }"
+                        class="form-control" placeholder="Last Name">
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('lastName').hasError('required') &&
+                            editEmployeeForm.get('lastName').touched">
+                  Please enter last name.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('lastName').hasError('maxlength') &&
+                            editEmployeeForm.get('lastName').touched">
+                    Last name cannot exceed 30 characters.
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="email"
+                        [ngClass]="{ 'is-invalid': editEmployeeForm.get('email').errors &&
+                                                    editEmployeeForm.get('email').touched }"
+                        class="form-control" placeholder="Email">
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('email').hasError('required') &&
+                            editEmployeeForm.get('email').touched">
+                  Please enter an email.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('email').hasError('maxlength') &&
+                            editEmployeeForm.get('email').touched">
+                    Email cannot exceed 50 characters.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('email').hasError('email') &&
+                            editEmployeeForm.get('email').touched">
+                    Invalid email! Enter a valid one.
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="dateOfBirth"
+                      [ngClass]="{ 'is-invalid': editEmployeeForm.get('dateOfBirth').errors &&
+                                                  editEmployeeForm.get('dateOfBirth').touched }"
+                      class="form-control" placeholder="Date of birth" bsDatepicker [bsConfig]="bsDatepickerConfig">
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('dateOfBirth').hasError('required') &&
+                            editEmployeeForm.get('dateOfBirth').touched">
+                  Please enter the date of birth.
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="eNumber"
+                      [ngClass]="{ 'is-invalid': editEmployeeForm.get('eNumber').errors &&
+                                                  editEmployeeForm.get('eNumber').touched }"
+                      class="form-control" placeholder="ENumber">
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('eNumber').hasError('required') &&
+                            editEmployeeForm.get('eNumber').touched">
+                  Please enter the ENumber.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('eNumber').hasError('maxlength') &&
+                            editEmployeeForm.get('eNumber').touched">
+                  ENumber cannot exceed 100 characters.
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="role"
+                      [ngClass]="{ 'is-invalid': editEmployeeForm.get('role').errors &&
+                                                  editEmployeeForm.get('role').touched }"
+                      class="form-control" placeholder="Role">
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('role').hasError('required') &&
+                            editEmployeeForm.get('role').touched">
+                  Please enter a role.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editEmployeeForm.get('role').hasError('maxlength') &&
+                            editEmployeeForm.get('role').touched">
+                  Role cannot exceed 50 characters.
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label" style="margin-right: 10px">Gender:</label>
+                <label class="radio-inline">
+                  <input type="radio" class="mr-3" value="male" formControlName="gender">Man
+                </label>
+                <label class="radio-inline ml-3">
+                  <input type="radio" class="mr-3" value="female" formControlName="gender">Woman
+                </label>
+              </div>
+              <div class="form-group">
+                <label class="control-label">Select Department:</label>
+                <indeavor-departments-selector formControlName="selectedDepartment"
+                                          [selectedDepartmentId] = "employeeResult?.employee?.departmentId"
+                                          [departments] ="departmentsResult?.departments"
+                                          (departmentSelected)="onDepartmentSelected($event)"
+                                          (departmentsLoaded)="onDepartmentSelected($event)">
+                </indeavor-departments-selector>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

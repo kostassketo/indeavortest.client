@@ -1,0 +1,147 @@
+<div class="container mt-8">
+  <div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="createEmployeeForm" (ngSubmit)="createEmployee()">
+              <h3>Create new Employee</h3>
+              <div class="form-group">
+                <input type="text"
+                      [ngClass]="{ 'is-invalid': createEmployeeForm.get('title').errors &&
+                                                 createEmployeeForm.get('title').touched }"
+                      formControlName="title"
+                      class="form-control"
+                      placeholder="Title">
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('title').hasError('required') &&
+                           createEmployeeForm.get('title').touched">
+                  Please enter a title.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('title').hasError('maxlength') &&
+                           createEmployeeForm.get('title').touched">
+                  Title cannot exceed 10 characters.
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="firstName"
+                        [ngClass]="{ 'is-invalid': createEmployeeForm.get('firstName').errors &&
+                                                   createEmployeeForm.get('firstName').touched }"
+                        class="form-control" placeholder="First Name">
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('firstName').hasError('required') &&
+                           createEmployeeForm.get('firstName').touched">
+                  Please enter first name.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('firstName').hasError('maxlength') &&
+                           createEmployeeForm.get('firstName').touched">
+                  First name cannot exceed 30 characters.
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="lastName"
+                        [ngClass]="{ 'is-invalid': createEmployeeForm.get('lastName').errors &&
+                                                   createEmployeeForm.get('lastName').touched }"
+                        class="form-control" placeholder="Last Name">
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('lastName').hasError('required') &&
+                           createEmployeeForm.get('lastName').touched">
+                  Please enter last name.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('lastName').hasError('maxlength') &&
+                           createEmployeeForm.get('lastName').touched">
+                    Last name cannot exceed 30 characters.
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="email"
+                        [ngClass]="{ 'is-invalid': createEmployeeForm.get('email').errors &&
+                                                   createEmployeeForm.get('email').touched }"
+                        class="form-control" placeholder="Email">
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('email').hasError('required') &&
+                           createEmployeeForm.get('email').touched">
+                  Please enter an email.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('email').hasError('maxlength') &&
+                           createEmployeeForm.get('email').touched">
+                    Email cannot exceed 50 characters.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('email').hasError('email') &&
+                           createEmployeeForm.get('email').touched">
+                    Invalid email! Enter a valid one.
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="dateOfBirth"
+                      [ngClass]="{ 'is-invalid': createEmployeeForm.get('dateOfBirth').errors &&
+                                                 createEmployeeForm.get('dateOfBirth').touched }"
+                      class="form-control" placeholder="Date of birth" bsDatepicker [bsConfig]="bsDatepickerConfig">
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('dateOfBirth').hasError('required') &&
+                           createEmployeeForm.get('dateOfBirth').touched">
+                  Please enter the date of birth.
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="eNumber"
+                      [ngClass]="{ 'is-invalid': createEmployeeForm.get('eNumber').errors &&
+                                                 createEmployeeForm.get('eNumber').touched }"
+                      class="form-control" placeholder="ENumber">
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('eNumber').hasError('required') &&
+                           createEmployeeForm.get('eNumber').touched">
+                  Please enter the ENumber.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('eNumber').hasError('maxlength') &&
+                           createEmployeeForm.get('eNumber').touched">
+                  ENumber cannot exceed 100 characters.
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" formControlName="role"
+                      [ngClass]="{ 'is-invalid': createEmployeeForm.get('role').errors &&
+                                                 createEmployeeForm.get('role').touched }"
+                      class="form-control" placeholder="Role">
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('role').hasError('required') &&
+                           createEmployeeForm.get('role').touched">
+                  Please enter a role.
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="createEmployeeForm.get('role').hasError('maxlength') &&
+                           createEmployeeForm.get('role').touched">
+                  Role cannot exceed 50 characters.
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label" style="margin-right: 10px">Gender:</label>
+                <label class="radio-inline">
+                  <input type="radio" class="mr-3" value="1" [checked]='true' formControlName="gender">Man
+                </label>
+                <label class="radio-inline ml-3">
+                  <input type="radio" class="mr-3" value="2" formControlName="gender">Woman
+                </label>
+              </div>
+              <div class="form-group">
+                  <label class="control-label">Select Department:</label>
+                  <indeavor-departments-selector formControlName="selectedDepartment"
+                                            [selectedDepartmentId] = "employee?.departmentId"
+                                            [departments] ="departmentsResult?.departments"
+                                            (departmentSelected)="onDepartmentSelected($event)">
+                  </indeavor-departments-selector>
+                </div>
+              <div class="form-group text-center">
+                <button class="btn btn-success btn-block" type="submit">Create</button>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

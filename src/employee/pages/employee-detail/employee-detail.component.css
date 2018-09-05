@@ -1,0 +1,9 @@
+.img-thumbnail {
+  margin: 25px;
+  width: 35%;
+  height: 35%;
+}
+
+.card-body {
+  padding: 0 25px;
+}

@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary navbar-fixed-top">
+  <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">Indeavor Client</a>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/employees/create']">
+            Create new Employee
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/departments/create']">
+            Create new Department
+          </a>
+        </li>
+      </ul>
+  </div>
+</nav>

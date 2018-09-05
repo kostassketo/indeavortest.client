@@ -1,0 +1,33 @@
+<div class="card md-4">
+  <div class="card-img-wrapper">
+    <img src="http://shopforclipart.com/images/selfish-people-cliparts/27.jpg" alt="" class="card-img-top">
+    <ul class="list-inline member-icons animate text-center">
+      <li class="list-inline-item">
+        <button class="btn btn-info"
+                [routerLink]="['/employees/', employee.id]">
+          <i class="fa fa-user"></i>
+        </button>
+      </li>
+      <li class="list-inline-item">
+        <button class="btn btn-info"
+                [routerLink]="['/employees/edit/', employee.id]">
+          <i class="fa fa-pencil"></i>
+        </button>
+      </li>
+      <li class="list-inline-item">
+        <button class="btn btn-info"
+                (click)="deleteEmployee($event)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body p-1">
+    <h6 class="card-title text-center mb-1">
+      {{ employee?.title }} {{ employee?.firstName }} {{ employee?.lastName }}
+    </h6>
+    <p class="card-text text-muted text-center">
+      {{ employee?.role }}
+    </p>
+  </div>
+</div>
